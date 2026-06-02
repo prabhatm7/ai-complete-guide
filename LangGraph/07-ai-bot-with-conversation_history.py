@@ -39,4 +39,4 @@ while True:
 
     conversation_history.append(HumanMessage(content=user_input))
     result = agent.invoke({"messages": conversation_history})
-    conversation_history = result["messages"] #reset
+    conversation_history = result["messages"] #maintains full conversation histroy 
