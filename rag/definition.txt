@@ -1,0 +1,3 @@
+RAG (Retreival Augmented Generation)
+It is a powerful technique that enhances AI language models by combining their generation capabilities with external retrieval.
+
