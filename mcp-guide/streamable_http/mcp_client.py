@@ -22,6 +22,12 @@ async def main():
         "mcp_server_streamable_http_details" :{
             "transport" : "streamable_http",
             "url": "http://127.0.0.1:8000/mcp"
+        },
+
+        "duckduckgo_mcp_server_details": {
+            "transport": "stdio",
+            "command": "uvx",
+            "args": ["duckduckgo-mcp-server"]
         }
     }
     )
@@ -30,8 +36,15 @@ async def main():
     list_tool_response = await client.get_tools()
     # print("Available tools:", list_tool_response)
 
+    
+    search_tool = None
     for tool in list_tool_response:
-        print("Tool:", tool.name)
+        print(tool.name)
+        if tool.name == "search":
+            search_tool = tool
+        
+    response = await search_tool.ainvoke({"query": "what is the capital of France?"})
+    print("\n\nResponse:", response)
 
 if __name__ == "__main__":
-    asyncio.run(main()) 
+    asyncio.run(main())
