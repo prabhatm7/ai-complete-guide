@@ -1,0 +1,35 @@
+# Job
+# - Runs Pods until a task successfully completes.
+# - Common for one-time/batch work.
+# - Unlike a Deployment, a Job is expected to finish.
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: database-migration
+  namespace: interview-demo
+
+spec:
+  # Number of successful completions required.
+  completions: 1
+
+  # Maximum number of Pods that can run at the same time.
+  parallelism: 1
+
+  # Clean up the Job 5 minutes after completion.
+  ttlSecondsAfterFinished: 300
+
+  template:
+    metadata:
+      labels:
+        app: database-migration
+    spec:
+      restartPolicy: OnFailure
+
+      containers:
+        - name: migration
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - echo "Running database migration"; sleep 10; echo "Migration complete"

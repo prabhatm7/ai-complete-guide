@@ -1,0 +1,30 @@
+# DaemonSet
+# - Ensures a Pod runs on every eligible node.
+# - Common examples: log collectors, monitoring agents, node-level agents.
+# - New eligible nodes automatically get the DaemonSet Pod.
+
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-agent
+  namespace: interview-demo
+  labels:
+    app: node-agent
+
+spec:
+  selector:
+    matchLabels:
+      app: node-agent
+
+  template:
+    metadata:
+      labels:
+        app: node-agent
+    spec:
+      containers:
+        - name: agent
+          image: busybox:1.36
+          command:
+            - /bin/sh
+            - -c
+            - while true; do echo "Node agent running"; sleep 30; done

@@ -1,0 +1,10 @@
+# Namespace
+# - Logical isolation boundary inside a Kubernetes cluster.
+# - Objects can be created inside this namespace by setting metadata.namespace.
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: interview-demo
+  labels:
+    environment: demo
